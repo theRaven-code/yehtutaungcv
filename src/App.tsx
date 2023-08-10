@@ -1,8 +1,7 @@
-import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [experiences, setExperiences] = useState([
+  const experiences = [
     {
       title: "Software Engineer",
       timeFrame: "January 2023 - Current",
@@ -64,7 +63,7 @@ function App() {
       responsibility:
         "I was a junior when i joined that company first. Started my career with maintaining and adding new features for its internal dashboard portal and client side website. Later, after having substanitial knowledge, I collaborated with my seniors in creating various features and major expansion for its home-grown application, MyanLearn App. ",
     },
-  ]);
+  ];
   return (
     <div className="App">
       <div className="app">
