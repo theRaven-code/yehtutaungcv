@@ -70,9 +70,7 @@ function App() {
       <div className="app">
         <header className="app-header">
           <img
-            src={
-              "https://media.licdn.com/dms/image/D5603AQF3aqsNn8b-Mw/profile-displayphoto-shrink_800_800/0/1690039487299?e=1697068800&v=beta&t=auhs1ORSraZOAKdA_DYjjlBRe6-X825pwJ198JuCVmo"
-            }
+            src="src\assets\profilepicture.jpg"
             alt="Profile"
             className="profile-image"
           />
@@ -161,7 +159,7 @@ function App() {
             </span>
           </button>
         </a>
-        <a href="https://1drv.ms/b/s!AnPXTB_olAFRgfEBazxD3hLO2BhloA?e=14t9gK" rel="noopener noreferrer">
+        <a href="src\assets\YeHtutAungCV.pdf" rel="noopener noreferrer">
           <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
               Download CV
