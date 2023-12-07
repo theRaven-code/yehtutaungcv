@@ -1,5 +1,5 @@
 import "./App.css";
-
+import profilePicture from './assets/profilepicture.jpg'; 
 function App() {
   const experiences =[
     {
@@ -69,9 +69,7 @@ function App() {
       <div className="app">
         <header className="app-header">
           <img
-            src={
-              "https://media.licdn.com/dms/image/D5603AQF3aqsNn8b-Mw/profile-displayphoto-shrink_800_800/0/1690039487299?e=1697068800&v=beta&t=auhs1ORSraZOAKdA_DYjjlBRe6-X825pwJ198JuCVmo"
-            }
+            src={profilePicture}
             alt="Profile"
             className="profile-image"
           />
