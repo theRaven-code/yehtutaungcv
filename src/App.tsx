@@ -1,7 +1,19 @@
 import "./App.css";
-import profilePicture from './assets/profilepicture.jpg'; 
-function App() {
-  const experiences =[
+import coverPic from './assets/coverPic.png';
+import profilepicture from './assets/profilepicture.jpg';
+interface Experience {
+  title: string;
+  timeFrame: string;
+  companyUrl: string;
+  companyName: string;
+  position?: string;
+  projects: string[];
+  techStack: string[];
+  responsibility: string;
+}
+
+const App: React.FC = () => {
+  const experiences: Experience[] =[
     {
       title: "Software Engineer",
       timeFrame: "January 2023 - Current",
@@ -69,12 +81,20 @@ function App() {
       <div className="app">
         <header className="app-header">
           <img
-            src={profilePicture}
+            src={coverPic}
             alt="Profile"
-            className="profile-image"
+            className="md:block hidden"
+            style={{ width: '100%', height: '100%', borderRadius: '16px' }}
           />
+          <div className="md:hidden block">
           <h1>Ye Htut Aung</h1>
-          <h2>Front-end React Developer</h2>
+          <h2>Front-end React Developer</h2>          
+          {/* <img
+            src={profilepicture}
+            alt="Olive Branch"
+            style={{ width: '300px', height: '250px', position: 'absolute', zIndex: '-1' }}
+          /> */}
+          </div>
         </header>
         <section className="app-section">
           <p>
@@ -94,6 +114,8 @@ function App() {
             <div className="skill">Redux</div>
             <div className="skill">Web Development</div>
             <div className="skill">CSS</div>
+            <div className="skill">Material UI</div>
+            <div className="skill">Tailwind CSS</div>
           </div>
         </section>
         <section className="app-section align-left">
