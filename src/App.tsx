@@ -5,13 +5,7 @@ import ExperienceCard from "./components/Experience";
 import { useState } from "react";
 import Sparkles from "./components/Sparkles";
 import resumePDF from "./assets/resume.pdf";
-import {
-  FaLinkedin,
-  FaGithub,
-  FaInstagram,
-  FaEnvelope,
-  FaTwitter,
-} from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 
 interface Experience {
   title: string;
