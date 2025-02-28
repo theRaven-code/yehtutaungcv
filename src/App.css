@@ -326,6 +326,13 @@ html {
   scroll-padding-top: 100px;
 }
 
+/* Mobile-specific scroll padding to account for fixed header */
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-top: 80px; /* Adjust based on your mobile header height */
+  }
+}
+
 /* Custom bullet point style */
 .custom-bullet {
   position: relative;

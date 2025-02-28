@@ -39,6 +39,7 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const lastScrollY = useRef<number>(0);
 
   // Scroll progress indicator
   const { scrollYProgress } = useScroll();
@@ -64,55 +65,63 @@ const App: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  // Update active section on scroll
+  // Effect to update active section based on scroll position
   useEffect(() => {
+    const sectionIds = navLinks.map((link) => link.href.replace("#", ""));
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-80px 0px -20% 0px", // Adjusted for header height
+      threshold: 0.1,
+    };
+
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-20% 0px -80% 0px" }
+      observerCallback,
+      observerOptions
     );
 
-    const sections = document.querySelectorAll("section[id]");
-    sections.forEach((section) => observer.observe(section));
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
 
     return () => {
-      sections.forEach((section) => observer.unobserve(section));
+      sectionIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) observer.unobserve(element);
+      });
     };
-  }, []);
+  }, [navLinks]);
 
-  // Handle header visibility on scroll
+  // Effect for header behavior on scroll
   useEffect(() => {
-    if (!headerRef.current) return;
-
-    let prevScrollPos = window.scrollY;
-
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      const header = headerRef.current;
+      if (!headerRef.current) return;
 
-      if (!header) return;
+      const currentScrollY = window.scrollY;
 
-      if (prevScrollPos > currentScrollPos) {
-        // Scrolling up
-        header.style.transform = "translateY(0)";
-      } else {
-        // Scrolling down
-        header.style.transform = "translateY(-100%)";
+      // Show header at top of page or when scrolling up
+      if (currentScrollY <= 50 || currentScrollY < lastScrollY.current) {
+        headerRef.current.style.transform = "translateY(0)";
+      }
+      // Hide header when scrolling down and not at the top
+      else if (currentScrollY > 100 && currentScrollY > lastScrollY.current) {
+        headerRef.current.style.transform = "translateY(-100%)";
       }
 
-      prevScrollPos = currentScrollPos;
+      lastScrollY.current = currentScrollY;
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Experience data
@@ -255,10 +264,19 @@ const App: React.FC = () => {
               href={link.href}
               onClick={(e) => {
                 e.preventDefault();
-                document
-                  .querySelector(link.href)
-                  ?.scrollIntoView({ behavior: "smooth" });
-                handleNavClick(link.href);
+                const section = document.querySelector(link.href);
+                if (section) {
+                  // Calculate position with offset
+                  const sectionTop =
+                    section.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    20;
+                  window.scrollTo({
+                    top: sectionTop,
+                    behavior: "smooth",
+                  });
+                  handleNavClick(link.href);
+                }
               }}
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeSection === link.href.replace("#", "")
@@ -614,11 +632,24 @@ const App: React.FC = () => {
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
-                      document
-                        .querySelector(link.href)
-                        ?.scrollIntoView({ behavior: "smooth" });
-                      handleNavClick(link.href);
                       setIsMenuOpen(false);
+                      // Small timeout to ensure the menu closes first
+                      setTimeout(() => {
+                        const section = document.querySelector(link.href);
+                        if (section) {
+                          // Calculate position with offset for fixed header
+                          const headerHeight = 70; // Approximate header height
+                          const sectionTop =
+                            section.getBoundingClientRect().top +
+                            window.pageYOffset -
+                            headerHeight;
+                          window.scrollTo({
+                            top: sectionTop,
+                            behavior: "smooth",
+                          });
+                          handleNavClick(link.href);
+                        }
+                      }, 300);
                     }}
                     className={`px-4 py-3 rounded-md text-base font-medium transition-colors ${
                       activeSection === link.href.replace("#", "")
