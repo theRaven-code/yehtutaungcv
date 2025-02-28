@@ -461,7 +461,7 @@ const App: React.FC = () => {
             />
             <SkillCategory
               title="State Management"
-              skills={["Redux", "Context API", "Zustand", "Recoil"]}
+              skills={["Redux", "Context API"]}
               delay={0.2}
             />
             <SkillCategory
@@ -477,15 +477,15 @@ const App: React.FC = () => {
             />
             <SkillCategory
               title="Backend & Database"
-              skills={["Node.js", "Express", "MongoDB", "REST API", "GraphQL"]}
+              skills={["Node.js", "Express", "MongoDB", "REST API"]}
               delay={0.4}
             />
             <SkillCategory
               title="Tools & Others"
               skills={[
                 "Git",
-                "GitHub",
-                "VS Code",
+                "Cursor",
+                "Postman",
                 "Figma",
                 "Agile/Scrum",
                 "Performance Optimization",
@@ -545,7 +545,7 @@ const App: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               href="mailto:isaravananofficial@gmail.com"
               className="w-full sm:w-auto inline-block px-6 py-3 rounded-xl 
-                         bg-purple-600/80 hover:bg-purple-700/90 
+                              bg-purple-600/80 hover:bg-purple-700/90 
                          text-white text-center shadow-lg hover:shadow-xl
                          transition-all duration-300 mt-6"
             >
