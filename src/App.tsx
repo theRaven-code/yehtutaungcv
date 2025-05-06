@@ -392,14 +392,21 @@ const App: React.FC = () => {
         </div>
 
         <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.98 }}
           href={resumePDF}
           download="YeHtutAung_Resume.pdf"
-          className="modern-button flex items-center justify-center gap-2 group"
+          aria-label="Download Resume"
+          className="modern-button flex items-center justify-center gap-4 group font-semibold text-lg px-8 py-4 rounded-2xl border border-white/20 shadow-lg bg-white/10 backdrop-blur-lg text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/40 hover:shadow-2xl hover:bg-white/20 relative overflow-hidden w-full max-w-xs mx-auto mt-6"
         >
-          <FaDownload size={16} className="group-hover:animate-bounce" />
-          <span>Download Resume</span>
+          <span className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/90 shadow-md group-hover:shadow-lg transition-all duration-300">
+            <FaDownload
+              size={22}
+              className="text-white drop-shadow-md group-hover:animate-bounce"
+            />
+          </span>
+          <span className="z-10">Download Resume</span>
+          <span className="absolute inset-0 rounded-2xl pointer-events-none group-hover:shadow-[0_0_32px_8px_rgba(139,92,246,0.15)] transition-all duration-300" />
         </motion.a>
       </div>
     </div>
@@ -806,18 +813,21 @@ const App: React.FC = () => {
                 ))}
                 {/* Download Resume button for mobile menu */}
                 <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.98 }}
                   href={resumePDF}
                   download="YeHtutAung_Resume.pdf"
-                  className="modern-button flex items-center justify-center gap-2 group mt-4"
-                  style={{ width: "100%" }}
+                  aria-label="Download Resume"
+                  className="modern-button flex items-center justify-center gap-4 group font-semibold text-lg px-8 py-4 rounded-2xl border border-white/20 shadow-lg bg-white/10 backdrop-blur-lg text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/40 hover:shadow-2xl hover:bg-white/20 relative overflow-hidden w-full mt-4"
                 >
-                  <FaDownload
-                    size={16}
-                    className="group-hover:animate-bounce"
-                  />
-                  <span>Download Resume</span>
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/90 shadow-md group-hover:shadow-lg transition-all duration-300">
+                    <FaDownload
+                      size={22}
+                      className="text-white drop-shadow-md group-hover:animate-bounce"
+                    />
+                  </span>
+                  <span className="z-10">Download Resume</span>
+                  <span className="absolute inset-0 rounded-2xl pointer-events-none group-hover:shadow-[0_0_32px_8px_rgba(139,92,246,0.15)] transition-all duration-300" />
                 </motion.a>
               </nav>
             </motion.div>
