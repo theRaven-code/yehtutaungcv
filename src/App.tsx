@@ -138,6 +138,15 @@ const App: React.FC = () => {
         } else if (currentScrollY < sections.current[0]?.top) {
           setActiveSection("home");
         }
+
+        // If near the bottom of the page, set active section to 'contact'
+        if (
+          window.innerHeight + window.pageYOffset >=
+            document.body.offsetHeight - 50 &&
+          activeSection !== "contact"
+        ) {
+          setActiveSection("contact");
+        }
       }, 10); // Small delay to prevent excessive updates
     };
 
@@ -400,33 +409,36 @@ const App: React.FC = () => {
   const renderMain = () => (
     <div className="space-y-24">
       {/* Hero section */}
-      <section id="home" className="relative min-h-[80vh] flex items-center">
-        <div className="gradient-blob w-[500px] h-[500px] -left-[20%] top-[10%] opacity-20"></div>
-        <div className="gradient-blob w-[300px] h-[300px] right-[10%] bottom-[20%] opacity-20"></div>
+      <section
+        id="home"
+        className="relative min-h-[90vh] flex items-center px-4 sm:px-6 lg:px-8"
+      >
+        <div className="gradient-blob w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] -left-[20%] top-[10%] opacity-20"></div>
+        <div className="gradient-blob w-[200px] sm:w-[250px] md:w-[300px] h-[200px] sm:h-[250px] md:h-[300px] right-[10%] bottom-[20%] opacity-20"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10"
+          className="relative z-10 w-full max-w-4xl mx-auto"
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
             Crafting Digital
             <br />
             <span className="text-gradient">Experiences</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl">
             I'm a front-end specialist with a passion for crafting intuitive,
             visually stunning digital experiences. With a solid foundation in
             front-end technologies, I bring ideas to life on the web.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="modern-button"
+              className="modern-button text-center"
               onClick={(e) => {
                 e.preventDefault();
                 document
@@ -441,7 +453,7 @@ const App: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#experience"
-              className="px-6 py-3 rounded-full font-medium transition-all duration-300 border border-primary/20 hover:border-primary/40"
+              className="px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 border border-primary/20 hover:border-primary/40 text-center"
               onClick={(e) => {
                 e.preventDefault();
                 document
@@ -457,27 +469,29 @@ const App: React.FC = () => {
       </section>
 
       {/* About section */}
-      <section id="about" className="relative">
+      <section
+        id="about"
+        className="relative px-4 sm:px-6 md:px-8 max-w-screen-lg mx-auto"
+      >
         <SectionHeading title="About Me" subtitle="My introduction" />
 
-        <div className="mt-12 grid md:grid-cols-2 gap-12 items-center">
+        <div className="mt-8 sm:mt-12 flex flex-col gap-8 sm:gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6 flex-1 min-w-0"
           >
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
               With 5+ years of hands-on experience crafting web and mobile
               applications, I transform ideas into intuitive, visually
               compelling digital experiences.
             </p>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl">
               Now, I'm <b>leveling up</b> — diving into{" "}
-              <b>back-end development</b>
-              to master server-side logic, database architecture, and API
-              integrations.
+              <b>back-end development</b> to master server-side logic, database
+              architecture, and API integrations.
             </p>
           </motion.div>
 
@@ -486,25 +500,33 @@ const App: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 gap-4"
+            className="flex flex-row gap-4 sm:gap-6 flex-1 w-full max-w-xs"
           >
-            <div className="modern-card">
-              <h3 className="text-3xl font-bold text-primary mb-2">5+</h3>
-              <p className="text-muted-foreground">Years Experience</p>
+            <div className="modern-card p-4 sm:p-5 md:p-6 flex-1 min-w-[120px] text-left">
+              <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">
+                5+
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Years Experience
+              </p>
             </div>
-            <div className="modern-card">
-              <h3 className="text-3xl font-bold text-primary mb-2">20+</h3>
-              <p className="text-muted-foreground">Projects Completed</p>
+            <div className="modern-card p-4 sm:p-5 md:p-6 flex-1 min-w-[120px] text-left">
+              <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-1 sm:mb-2">
+                20+
+              </h3>
+              <p className="text-xs sm:text-sm text-muted-foreground">
+                Projects Completed
+              </p>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Experience section */}
-      <section id="experience">
+      <section id="experience" className="px-4 sm:px-6 lg:px-8">
         <SectionHeading title="Experience" subtitle="My professional journey" />
 
-        <div className="mt-12 space-y-8">
+        <div className="mt-8 sm:mt-12 space-y-6 sm:space-y-8">
           {experiences.map((experience, index) => (
             <motion.div
               key={index}
@@ -512,34 +534,36 @@ const App: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="modern-card"
+              className="modern-card p-4 sm:p-6"
             >
-              <div className="flex flex-col md:flex-row justify-between md:items-center mb-4">
-                <h3 className="text-xl font-bold">{experience.title}</h3>
-                <span className="text-muted-foreground mt-2 md:mt-0">
+              <div className="flex flex-col md:flex-row justify-between md:items-center mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold">
+                  {experience.title}
+                </h3>
+                <span className="text-sm sm:text-base text-muted-foreground mt-1 sm:mt-0">
                   {experience.timeFrame}
                 </span>
               </div>
 
-              <div className="mb-4">
+              <div className="mb-3 sm:mb-4">
                 <a
                   href={experience.companyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover-underline inline-flex items-center gap-2"
+                  className="text-primary hover-underline inline-flex items-center gap-2 text-sm sm:text-base"
                 >
                   {experience.companyName}
                   <FaExternalLinkAlt size={12} />
                 </a>
               </div>
 
-              <p className="text-muted-foreground mb-6">
+              <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
                 {experience.responsibility}
               </p>
 
               <div className="flex flex-wrap gap-2">
                 {experience.techStack?.map((tech, i) => (
-                  <span key={i} className="skill-badge">
+                  <span key={i} className="skill-badge text-xs sm:text-sm">
                     {tech}
                   </span>
                 ))}
@@ -550,84 +574,103 @@ const App: React.FC = () => {
       </section>
 
       {/* Skills section */}
-      <section id="skills">
+      <section id="skills" className="px-4 sm:px-6 lg:px-8">
         <SectionHeading title="Skills" subtitle="My technical expertise" />
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <SkillCategory
-            title="Frontend Development"
-            skills={[
-              "React",
-              "Next.js",
-              "TypeScript",
-              "JavaScript",
-              "HTML5",
-              "CSS3/SCSS",
-            ]}
-            delay={0}
-          />
-          <SkillCategory
-            title="Mobile Development"
-            skills={[
-              "React Native",
-              "Expo",
-              "Mobile UI Design",
-              "App Performance",
-            ]}
-            delay={0.1}
-          />
-          <SkillCategory
-            title="State Management"
-            skills={["Redux", "Context API"]}
-            delay={0.2}
-          />
-          <SkillCategory
-            title="UI/Styling"
-            skills={[
-              "Tailwind CSS",
-              "Material UI",
-              "Styled Components",
-              "CSS Modules",
-            ]}
-            delay={0.3}
-          />
-          <SkillCategory
-            title="Backend & Database"
-            skills={["Node.js", "Express", "MongoDB", "REST API"]}
-            delay={0.4}
-          />
-          <SkillCategory
-            title="Tools & Others"
-            skills={["Git", "Cursor", "Postman", "Figma", "Agile/Scrum"]}
-            delay={0.5}
-          />
+        <div className="mt-8 sm:mt-12 flex flex-col gap-8">
+          {[
+            {
+              category: "Frontend Development",
+              skills: [
+                "React",
+                "Next.js",
+                "TypeScript",
+                "JavaScript",
+                "HTML5",
+                "CSS3/SCSS",
+              ],
+            },
+            {
+              category: "Mobile Development",
+              skills: [
+                "React Native",
+                "Expo",
+                "Mobile UI Design",
+                "App Performance",
+              ],
+            },
+            {
+              category: "State Management",
+              skills: ["Redux", "Context API"],
+            },
+            {
+              category: "UI/Styling",
+              skills: [
+                "Tailwind CSS",
+                "Material UI",
+                "Styled Components",
+                "CSS Modules",
+              ],
+            },
+            {
+              category: "Backend & Database",
+              skills: ["Node.js", "Express", "MongoDB", "REST API"],
+            },
+            {
+              category: "Tools & Others",
+              skills: ["Git", "Cursor", "Postman", "Figma", "Agile/Scrum"],
+            },
+          ].map(({ category, skills }, idx) => (
+            <div key={category} className="flex flex-col gap-3">
+              <h4 className="text-base font-semibold text-muted-foreground mb-1 pl-1 tracking-wide uppercase">
+                {category}
+              </h4>
+              <div className="flex flex-wrap gap-3">
+                {skills.map((skill, i) => (
+                  <span
+                    key={skill}
+                    className="skill-badge text-sm md:text-base px-4 py-1 rounded-full bg-accent/10 text-foreground border border-accent/20 transition-transform duration-200 hover:scale-110 hover:bg-primary/20 hover:text-primary shadow-sm cursor-pointer"
+                    style={{
+                      fontWeight: idx % 2 === 0 && i % 2 === 0 ? 600 : 500,
+                      fontSize: i % 3 === 0 ? "1.1em" : "1em",
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Contact section */}
-      <section id="contact">
+      <section
+        id="contact"
+        className="px-4 sm:px-6 lg:px-8 py-24 sm:py-32 min-h-[80vh]"
+      >
         <SectionHeading title="Contact Me" subtitle="Let's get in touch" />
 
-        <div className="mt-12">
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
+        <div className="mt-8 sm:mt-12">
+          <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 max-w-2xl">
             I'm currently looking for new opportunities. Whether you have a
             question or just want to say hi, I'll try my best to get back to
             you!
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
             <motion.a
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               href="mailto:isaravananofficial@gmail.com"
-              className="modern-card flex items-center gap-4"
+              className="modern-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4"
             >
-              <div className="p-3 rounded-full bg-primary/10 text-primary">
-                <FaEnvelope size={24} />
+              <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary">
+                <FaEnvelope size={20} className="sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h4 className="font-medium">Email</h4>
-                <p className="text-muted-foreground">
+                <h4 className="font-medium text-sm sm:text-base">Email</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   isaravananofficial@gmail.com
                 </p>
               </div>
@@ -639,14 +682,16 @@ const App: React.FC = () => {
               href="https://www.linkedin.com/in/ye-htut-aung-saravanan-4a018b199/"
               target="_blank"
               rel="noopener noreferrer"
-              className="modern-card flex items-center gap-4"
+              className="modern-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4"
             >
-              <div className="p-3 rounded-full bg-primary/10 text-primary">
-                <FaLinkedin size={24} />
+              <div className="p-2 sm:p-3 rounded-full bg-primary/10 text-primary">
+                <FaLinkedin size={20} className="sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h4 className="font-medium">LinkedIn</h4>
-                <p className="text-muted-foreground">Connect with me</p>
+                <h4 className="font-medium text-sm sm:text-base">LinkedIn</h4>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  Connect with me
+                </p>
               </div>
             </motion.a>
           </div>
@@ -759,6 +804,21 @@ const App: React.FC = () => {
                     </span>
                   </motion.a>
                 ))}
+                {/* Download Resume button for mobile menu */}
+                <motion.a
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  href={resumePDF}
+                  download="YeHtutAung_Resume.pdf"
+                  className="modern-button flex items-center justify-center gap-2 group mt-4"
+                  style={{ width: "100%" }}
+                >
+                  <FaDownload
+                    size={16}
+                    className="group-hover:animate-bounce"
+                  />
+                  <span>Download Resume</span>
+                </motion.a>
               </nav>
             </motion.div>
           )}
@@ -784,48 +844,6 @@ const App: React.FC = () => {
       <div className="pt-16 lg:pt-0">
         <Layout sidebar={renderSidebar()} main={renderMain()} />
       </div>
-
-      {/* Footer */}
-      <footer className="py-8 border-t border-border mt-24">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Ye Htut Aung. All rights
-              reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href="https://github.com/theRaven-code"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-              >
-                <FaGithub size={16} />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href="https://www.linkedin.com/in/ye-htut-aung-saravanan-4a018b199/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-icon"
-              >
-                <FaLinkedin size={16} />
-              </motion.a>
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                href="mailto:isaravananofficial@gmail.com"
-                className="social-icon"
-              >
-                <FaEnvelope size={16} />
-              </motion.a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
@@ -849,43 +867,6 @@ const SectionHeading = ({
       <h2 className="text-3xl md:text-4xl font-bold mb-3">{title}</h2>
       <p className="text-lg text-muted-foreground mb-6">{subtitle}</p>
       <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto lg:mx-0"></div>
-    </motion.div>
-  );
-};
-
-// Update SkillCategory component
-const SkillCategory = ({
-  title,
-  skills,
-  delay = 0,
-}: {
-  title: string;
-  skills: string[];
-  delay?: number;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay }}
-      viewport={{ once: true }}
-      className="modern-card"
-    >
-      <h3 className="text-xl font-bold mb-4">{title}</h3>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <motion.span
-            key={skill}
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: delay + index * 0.05 }}
-            viewport={{ once: true }}
-            className="skill-badge"
-          >
-            {skill}
-          </motion.span>
-        ))}
-      </div>
     </motion.div>
   );
 };
